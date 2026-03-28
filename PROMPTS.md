@@ -96,9 +96,23 @@
 
 ---
 
-## 7. 구현 (진행 예정)
+## 7. 구현 (2026.03.28~)
 
-> 구현 단계에서의 AI 활용 내용은 진행하며 추가 기록합니다.
+### Commit 1: 프로젝트 초기 설정 및 멀티모듈 구성
+- mockserver 모듈 build.gradle → build.gradle.kts 마이그레이션 자동화
+- kapt → ksp 전환, compileSdk/targetSdk 최신화
+- Version Catalog (libs.versions.toml) 전체 의존성 구성
+- 빌드 오류 대응: core-ktx 1.17.0이 compileSdk 36 요구 → 자동 감지 및 수정
+
+### Commit 2: Domain 모델 및 Repository 인터페이스 정의
+- Domain 모델, Repository 인터페이스, UseCase 코드 생성
+- 리뷰 시 Pair → SectionsResult 전용 클래스로 개선 (AI 제안, 사용자 승인)
+
+### Commit 3: Data Layer 구현 (API, DTO, Room, Repository)
+- Retrofit API, DTO, Room, Repository, DI 모듈 전체 코드 생성 (13개 파일)
+- MockInterceptor를 OkHttpClient에 연동하는 NetworkModule 구성
+- ViewModel 에러/로딩 처리 전략 논의: onSuccess/onFailure → try-catch-finally 패턴으로 개선
+- 섹션 상품 병렬 로드(async + awaitAll) vs 개별 표시 트레이드오프 분석 → awaitAll 채택 (레이아웃 안정성)
 
 ---
 
