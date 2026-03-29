@@ -120,6 +120,18 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
 - 13개 파일 생성 (API, DTO, Room, Repository, DI)
 - awaitAll 채택 (레이아웃 안정성 > 개별 표시의 체감 속도)
 
+### Commit 4: MainViewModel 및 상태 관리 구현
+
+**프롬프트:**
+- "PLAN.md의 단일 UiState + combine + stateIn 설계에 맞춰 MainViewModel을 구현해줘"
+- "리뷰 결과 refresh()에서 isRefreshing이 즉시 꺼지는 버그가 있으니, 로드 완료 후 finally에서 해제되도록 수정하고 update로 일관성 있게 적용해줘"
+
+**결과:**
+- MainUiState, MainViewModel 구현 (combine 4개 Flow → 단일 UiState)
+- refresh() 버그 수정: isRefreshing 유지 + 기존 리스트 유지하며 교체
+- loadSectionsWithProducts() 공통 메서드 추출로 중복 제거
+- MutableStateFlow 상태 변경을 update로 통일
+
 ---
 
 ## 8. 테스트 (진행 예정)
