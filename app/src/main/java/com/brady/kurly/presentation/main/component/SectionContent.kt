@@ -16,8 +16,11 @@ fun SectionContent(
 ) {
     when (section.type) {
         SectionType.GRID -> {
-            // Commit 7에서 구현
-            Text("Grid: ${section.title} (${section.products.size}개)")
+            GridSectionContent(
+                products = section.products,
+                wishIds = wishIds,
+                onToggleWish = onToggleWish
+            )
         }
         SectionType.HORIZONTAL -> {
             // Commit 8에서 구현
