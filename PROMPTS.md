@@ -169,6 +169,15 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
 - wishIds → Boolean 호이스팅 적용 (GridSectionContent에서 변환)
 - products.take(6).chunked(3) remember 캐싱
 
+### Commit 8: Horizontal 섹션 UI 구현
+
+**프롬프트:**
+- "LazyRow 기반 가로 스크롤 섹션을 구현해줘. HorizontalProductCard 재사용, key 설정, 호이스팅 적용"
+
+**결과:**
+- HorizontalSectionContent 구현 (LazyRow + key + 호이스팅)
+- Commit 7의 HorizontalProductCard 재사용
+
 ---
 
 ## 8. 테스트 (진행 예정)

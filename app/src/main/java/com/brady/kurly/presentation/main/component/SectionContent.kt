@@ -23,8 +23,11 @@ fun SectionContent(
             )
         }
         SectionType.HORIZONTAL -> {
-            // Commit 8에서 구현
-            Text("Horizontal: ${section.title} (${section.products.size}개)")
+            HorizontalSectionContent(
+                products = section.products,
+                wishIds = wishIds,
+                onToggleWish = onToggleWish
+            )
         }
         SectionType.VERTICAL -> {
             // Commit 9에서 구현
