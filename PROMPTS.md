@@ -147,6 +147,17 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
 - refresh() 실패 시 currentPage, hasNextPage 원래 값 복원 로직 추가
 - MutableStateFlow 상태 변경을 .update{}로 전면 통일
 
+### Commit 6: 상품 카드 공통 컴포넌트 구현 (이미지, 가격, 찜)
+
+**프롬프트:**
+- "Coil AsyncImage, 찜 버튼(isWished Boolean 호이스팅), 가격 표시(2줄/1줄) 공통 컴포넌트를 구현해줘"
+- "리뷰 결과 NumberFormat.getNumberInstance()가 매 호출마다 새 인스턴스를 생성하니 file-level로 캐싱해줘"
+
+**결과:**
+- ProductImage, WishButton, TwoLinePriceDisplay, InlinePriceDisplay 구현
+- WishButton에 isWished: Boolean 호이스팅 적용 (Set<Long> 안 넘김)
+- NumberFormat 인스턴스 file-level 재사용으로 불필요한 객체 생성 방지
+
 ---
 
 ## 8. 테스트 (진행 예정)
