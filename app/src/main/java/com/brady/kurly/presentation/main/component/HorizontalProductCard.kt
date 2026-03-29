@@ -25,6 +25,7 @@ fun HorizontalProductCard(
         Box {
             ProductImage(
                 imageUrl = product.image,
+                isSoldOut = product.isSoldOut,
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(0.75f)

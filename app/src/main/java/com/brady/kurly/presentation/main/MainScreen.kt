@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.brady.kurly.presentation.common.ErrorScreen
 import com.brady.kurly.presentation.common.FullScreenLoading
 import com.brady.kurly.presentation.common.PageLoadingIndicator
 import com.brady.kurly.presentation.main.component.SectionContent
@@ -58,6 +59,13 @@ fun MainScreen(
         when {
             uiState.isLoading -> {
                 FullScreenLoading(modifier = Modifier.padding(paddingValues))
+            }
+            uiState.error != null && uiState.sections.isEmpty() -> {
+                ErrorScreen(
+                    message = uiState.error!!,
+                    onRetry = { viewModel.refresh() },
+                    modifier = Modifier.padding(paddingValues)
+                )
             }
             else -> {
                 PullToRefreshBox(

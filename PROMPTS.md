@@ -188,6 +188,16 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
 - VerticalSectionContent (일반 Column, 호이스팅 적용)
 - SectionContent 3가지 분기 전부 실제 컴포넌트로 교체 완료
 
+### Commit 10: UX 개선 (에러 처리, 품절)
+
+**프롬프트:**
+- "에러 화면(메시지 + 재시도 버튼)을 만들고, MainScreen에 에러 분기를 추가해줘. 데이터가 있으면 기존 리스트 유지"
+- "품절 상품(isSoldOut=true)에 반투명 오버레이 + '품절' 텍스트를 ProductImage에 추가해줘"
+
+**결과:**
+- ErrorScreen 구현, MainScreen에 `error != null && sections.isEmpty()` 분기 추가
+- ProductImage에 isSoldOut dim 처리 (White 60% 오버레이)
+
 ---
 
 ## 8. 테스트 (진행 예정)

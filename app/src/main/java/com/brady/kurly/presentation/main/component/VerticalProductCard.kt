@@ -33,6 +33,7 @@ fun VerticalProductCard(
         Box {
             ProductImage(
                 imageUrl = product.image,
+                isSoldOut = product.isSoldOut,
                 modifier = Modifier.size(100.dp)
             )
             WishButton(
