@@ -29,17 +29,18 @@ class MainViewModel @Inject constructor(
     private val _sections = MutableStateFlow<List<SectionWithProducts>>(emptyList())
     private val _pagingState = MutableStateFlow(PagingState())
     private val _error = MutableStateFlow<String?>(null)
+    private val _hasNextPage = MutableStateFlow(true)
 
     private var currentPage = 1
-    private var hasNextPage = true
     private var isLoadingPage = false
 
     val uiState: StateFlow<MainUiState> = combine(
         _sections,
         wishRepository.observeWishIds(),
         _pagingState,
-        _error
-    ) { sections, wishIds, paging, error ->
+        _error,
+        _hasNextPage
+    ) { sections, wishIds, paging, error, hasNextPage ->
         MainUiState(
             sections = sections,
             wishIds = wishIds,
@@ -60,7 +61,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun loadNextPage() {
-        if (isLoadingPage || !hasNextPage) return
+        if (isLoadingPage || !_hasNextPage.value) return
         isLoadingPage = true
 
         viewModelScope.launch {
@@ -94,8 +95,11 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             _pagingState.update { it.copy(isRefreshing = true) }
 
+            val previousPage = currentPage
+            val previousHasNext = _hasNextPage.value
+
             currentPage = 1
-            hasNextPage = true
+            _hasNextPage.update { true }
             _error.update { null }
 
             try {
@@ -104,6 +108,8 @@ class MainViewModel @Inject constructor(
                 _sections.update { sectionsWithProducts }
                 currentPage++
             } catch (e: Exception) {
+                currentPage = previousPage
+                _hasNextPage.update { previousHasNext }
                 _error.update { e.message ?: "알 수 없는 에러가 발생했습니다" }
             } finally {
                 _pagingState.update { PagingState() }
@@ -114,7 +120,7 @@ class MainViewModel @Inject constructor(
 
     private suspend fun loadSectionsWithProducts(): List<SectionWithProducts> {
         val result = sectionRepository.getSections(currentPage).getOrThrow()
-        hasNextPage = result.nextPage != null
+        _hasNextPage.update { result.nextPage != null }
 
         return coroutineScope {
             result.sections.map { section ->
@@ -139,7 +145,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun clearError() {
-        _error.value = null
+        _error.update { null }
     }
 }
 

@@ -132,6 +132,21 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
 - loadSectionsWithProducts() 공통 메서드 추출로 중복 제거
 - MutableStateFlow 상태 변경을 update로 통일
 
+### Commit 5: 메인 화면 기본 구조 및 SectionHeader 구현
+
+**프롬프트:**
+- "LazyColumn + PullToRefreshBox + collectAsStateWithLifecycle 기반으로 메인 화면 구조를 작성해줘. key와 contentType 설정 포함"
+- "전체 프로젝트 코드 리뷰를 돌려서 이슈를 찾아줘"
+- "hasNextPage가 일반 var라 combine에서 반응형으로 동작하지 않으니 MutableStateFlow로 변경해줘"
+- "refresh() 실패 시 currentPage가 리셋된 상태에서 중복 데이터가 추가되는 버그를 수정해줘. 실패 시 원래 값으로 복원하는 방식으로"
+
+**결과:**
+- MainScreen, SectionHeader, SectionContent, LoadingIndicator 구현
+- 전체 코드 리뷰 수행 → 12개 이슈 발견 (CRITICAL 1, HIGH 2, MEDIUM 4, LOW 5)
+- hasNextPage를 MutableStateFlow로 변경, combine에 5번째 Flow로 포함
+- refresh() 실패 시 currentPage, hasNextPage 원래 값 복원 로직 추가
+- MutableStateFlow 상태 변경을 .update{}로 전면 통일
+
 ---
 
 ## 8. 테스트 (진행 예정)
