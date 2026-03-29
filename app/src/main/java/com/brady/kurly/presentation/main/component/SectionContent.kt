@@ -1,9 +1,7 @@
 package com.brady.kurly.presentation.main.component
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.brady.kurly.domain.model.Product
 import com.brady.kurly.domain.model.SectionType
 import com.brady.kurly.domain.model.SectionWithProducts
 
@@ -30,8 +28,11 @@ fun SectionContent(
             )
         }
         SectionType.VERTICAL -> {
-            // Commit 9에서 구현
-            Text("Vertical: ${section.title} (${section.products.size}개)")
+            VerticalSectionContent(
+                products = section.products,
+                wishIds = wishIds,
+                onToggleWish = onToggleWish
+            )
         }
     }
 }

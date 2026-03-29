@@ -178,6 +178,16 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
 - HorizontalSectionContent 구현 (LazyRow + key + 호이스팅)
 - Commit 7의 HorizontalProductCard 재사용
 
+### Commit 9: Vertical 섹션 UI 구현
+
+**프롬프트:**
+- "가로형 카드(Row: 이미지+텍스트/가격) VerticalProductCard와 Column 기반 VerticalSectionContent를 구현해줘. 제목 1줄 말줄임, 가격 1줄 표시, LazyColumn 중첩 방지"
+
+**결과:**
+- VerticalProductCard (Row 레이아웃, maxLines=1, InlinePriceDisplay)
+- VerticalSectionContent (일반 Column, 호이스팅 적용)
+- SectionContent 3가지 분기 전부 실제 컴포넌트로 교체 완료
+
 ---
 
 ## 8. 테스트 (진행 예정)
