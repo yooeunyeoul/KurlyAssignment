@@ -158,6 +158,17 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
 - WishButton에 isWished: Boolean 호이스팅 적용 (Set<Long> 안 넘김)
 - NumberFormat 인스턴스 file-level 재사용으로 불필요한 객체 생성 방지
 
+### Commit 7: Grid 섹션 UI 구현
+
+**프롬프트:**
+- "3x2 고정 그리드 레이아웃을 Column + Row로 구현하고, HorizontalProductCard(grid/horizontal 공용)를 작성해줘. LazyColumn 중첩 방지 고려"
+- "리뷰 결과 take(6).chunked(3)가 리컴포지션마다 새 리스트를 생성하니 remember로 캐싱해줘"
+
+**결과:**
+- GridSectionContent, HorizontalProductCard 구현
+- wishIds → Boolean 호이스팅 적용 (GridSectionContent에서 변환)
+- products.take(6).chunked(3) remember 캐싱
+
 ---
 
 ## 8. 테스트 (진행 예정)
