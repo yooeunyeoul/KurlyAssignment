@@ -214,6 +214,19 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
   - 초기 로딩, 페이징 누적, 마지막 페이지, 찜 토글, 새로고침, 에러, 에러 복구, 중복 로딩 방지
 - Turbine의 test{} + expectMostRecentItem()으로 WhileSubscribed StateFlow 테스트 해결
 
+### Commit 12: Shimmer/Skeleton UI + 찜 애니메이션
+
+**프롬프트:**
+- "InfiniteTransition + Brush 기반 Shimmer를 구현해줘. Brush를 상위에서 1개만 생성해서 모든 Skeleton Box가 공유하도록"
+- "SectionContent에서 modifier를 하위 컴포넌트에 전달하도록 Compose 컨벤션 수정해줘"
+- "WishButton에 spring 기반 스케일 팝 애니메이션을 추가해줘"
+
+**결과:**
+- ShimmerEffect: rememberShimmerBrush() 1개로 모든 Box 공유 (성능 최적화)
+- SkeletonSectionList: 섹션 3개 뼈대 (타이틀 + 카드 3개)
+- SectionContent modifier 컨벤션 수정 (하위 컴포넌트에 전달)
+- WishButton: animateFloatAsState + spring으로 팝 효과
+
 ---
 
 ## AI 활용 방식 요약

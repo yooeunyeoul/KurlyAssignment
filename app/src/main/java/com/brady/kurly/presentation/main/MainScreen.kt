@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.brady.kurly.presentation.common.ErrorScreen
-import com.brady.kurly.presentation.common.FullScreenLoading
 import com.brady.kurly.presentation.common.PageLoadingIndicator
+import com.brady.kurly.presentation.common.SkeletonSectionList
 import com.brady.kurly.presentation.main.component.SectionContent
 import com.brady.kurly.presentation.main.component.SectionHeader
 
@@ -58,7 +58,7 @@ fun MainScreen(
     ) { paddingValues ->
         when {
             uiState.isLoading -> {
-                FullScreenLoading(modifier = Modifier.padding(paddingValues))
+                SkeletonSectionList(modifier = Modifier.padding(paddingValues))
             }
             uiState.error != null && uiState.sections.isEmpty() -> {
                 ErrorScreen(

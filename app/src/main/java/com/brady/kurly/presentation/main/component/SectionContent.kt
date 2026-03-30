@@ -17,21 +17,24 @@ fun SectionContent(
             GridSectionContent(
                 products = section.products,
                 wishIds = wishIds,
-                onToggleWish = onToggleWish
+                onToggleWish = onToggleWish,
+                modifier = modifier
             )
         }
         SectionType.HORIZONTAL -> {
             HorizontalSectionContent(
                 products = section.products,
                 wishIds = wishIds,
-                onToggleWish = onToggleWish
+                onToggleWish = onToggleWish,
+                modifier = modifier
             )
         }
         SectionType.VERTICAL -> {
             VerticalSectionContent(
                 products = section.products,
                 wishIds = wishIds,
-                onToggleWish = onToggleWish
+                onToggleWish = onToggleWish,
+                modifier = modifier
             )
         }
     }
