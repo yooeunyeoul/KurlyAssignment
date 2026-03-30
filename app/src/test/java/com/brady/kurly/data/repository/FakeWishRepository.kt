@@ -3,7 +3,6 @@ package com.brady.kurly.data.repository
 import com.brady.kurly.domain.repository.WishRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.map
 
 class FakeWishRepository : WishRepository {
 
