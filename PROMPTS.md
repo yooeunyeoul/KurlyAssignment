@@ -227,6 +227,16 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
 - SectionContent modifier 컨벤션 수정 (하위 컴포넌트에 전달)
 - WishButton: animateFloatAsState + spring으로 팝 효과
 
+### Commit 13: UseCase + Mapper 단위 테스트 추가
+
+**프롬프트:**
+- "ToggleWishUseCase 테스트(찜 추가/제거 분기)와 DtoMapper 테스트(type 매핑, 할인 유무, 페이징 유무)를 FakeWishRepository 재사용해서 작성해줘"
+
+**결과:**
+- ToggleWishUseCaseTest 2개 시나리오 (찜 추가, 찜 제거)
+- DtoMapperTest 8개 시나리오 (type 매핑 4종, 할인 유무 2종, 페이징 유무 2종)
+- 총 18개 테스트 전부 통과
+
 ---
 
 ## AI 활용 방식 요약
