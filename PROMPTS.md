@@ -200,9 +200,19 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
 
 ---
 
-## 8. 테스트 (진행 예정)
+## 8. 테스트 (2026.03.30)
 
-> 테스트 작성 시 AI 활용 내용을 추가 기록합니다.
+### Commit 11: ViewModel 단위 테스트
+
+**프롬프트:**
+- "Google 공식 권장(Fake over Mock)에 따라 FakeSectionRepository, FakeWishRepository를 작성하고, MainViewModel 단위 테스트 8개 시나리오를 구현해줘"
+- "WhileSubscribed StateFlow 테스트를 위해 Turbine 라이브러리로 수집 패턴 적용해줘"
+
+**결과:**
+- FakeSectionRepository, FakeWishRepository 구현 (Now in Android 패턴)
+- MainViewModelTest 8개 시나리오 전부 통과
+  - 초기 로딩, 페이징 누적, 마지막 페이지, 찜 토글, 새로고침, 에러, 에러 복구, 중복 로딩 방지
+- Turbine의 test{} + expectMostRecentItem()으로 WhileSubscribed StateFlow 테스트 해결
 
 ---
 
