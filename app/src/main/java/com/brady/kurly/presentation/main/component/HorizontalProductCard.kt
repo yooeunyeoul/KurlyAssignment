@@ -2,8 +2,10 @@ package com.brady.kurly.presentation.main.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +23,7 @@ fun HorizontalProductCard(
     onToggleWish: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.height(290.dp)) {
         Box {
             ProductImage(
                 imageUrl = product.image,
@@ -42,12 +44,13 @@ fun HorizontalProductCard(
         Text(
             text = product.name,
             fontSize = 14.sp,
+            lineHeight = 18.sp,
             maxLines = 2,
-            minLines = 2,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 4.dp, vertical = 4.dp)
+                .padding(horizontal = 4.dp)
+                .padding(top = 4.dp)
         )
 
         TwoLinePriceDisplay(
@@ -55,5 +58,7 @@ fun HorizontalProductCard(
             discountedPrice = product.discountedPrice,
             modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp)
         )
+
+        Spacer(modifier = Modifier.weight(1f))
     }
 }

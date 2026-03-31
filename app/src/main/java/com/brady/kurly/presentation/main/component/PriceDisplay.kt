@@ -66,10 +66,6 @@ fun TwoLinePriceDisplay(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
             )
-            Text(
-                text = " ",
-                fontSize = 12.sp
-            )
         }
     }
 }
