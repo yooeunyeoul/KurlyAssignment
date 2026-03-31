@@ -239,6 +239,34 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
 
 ---
 
+## AI 결과를 수정/보완한 사례
+
+### 1. 세분화 StateFlow 권장 → 단일 UiState 유지 결정
+- AI가 "2026 트렌드는 여러 StateFlow로 세분화"라고 권장
+- Google 공식 문서와 Now in Android 확인 결과 단일 UiState + combine이 여전히 공식 권장
+- AI 권장을 채택하지 않고 Google 공식 패턴 유지
+
+### 2. derivedStateOf + remember 동작 설명 오류 정정
+- AI가 "remember 블록 안에서 uiState를 참조하면 캡처 문제가 있다"고 설명
+- Compose State delegate(`by`)로 읽는 값은 derivedStateOf가 자동 추적한다는 점을 확인
+- AI의 잘못된 설명을 지적하여 정정, 코드 수정 불필요 판단
+
+### 3. refresh() isRefreshing 버그 발견
+- AI가 생성한 refresh() 코드에서 isRefreshing이 즉시 꺼지는 버그 발견
+- loadNextPage()를 재사용하는 구조 → refresh 전용 로직으로 분리
+- 실패 시 이전 상태 복원 로직도 직접 설계하여 추가
+
+### 4. 호이스팅 설계 개선
+- AI가 처음 설계한 구조: ProductCard에 `wishIds: Set<Long>` 전달 + 내부 derivedStateOf
+- Set 전달 시 참조 변경만으로 카드가 리컴포지션되는 문제를 지적
+- SectionContent에서 `product.id in wishIds` → `Boolean`으로 변환 후 전달하는 구조로 개선
+
+### 5. NumberFormat 스레드 안전 문제 발견
+- AI가 생성한 코드에서 file-level NumberFormat 인스턴스가 스레드 안전하지 않음을 리뷰에서 발견
+- `String.format("%,d원", price)`로 대체
+
+---
+
 ## AI 활용 방식 요약
 
 | 활용 방식 | 내용 |
@@ -246,5 +274,6 @@ LazyColumn key/contentType, derivedStateOf 등의 최적화 전략을 수립한 
 | 리서치 도구 | 2026 최신 Android 기술 트렌드, 공식 권장 패턴 조사 |
 | 설계 검증 | 내가 수립한 아키텍처가 공식 권장과 일치하는지 확인 |
 | 코드 생성 | 설계 문서(PLAN.md) 기반으로 코드 자동 생성 |
+| 코드 리뷰 | AI 생성 코드를 직접 리뷰하여 버그/성능 이슈 발견 및 수정 |
 | 트레이드오프 분석 | 기술 선택지의 장단점 비교 (Paging3 vs 수동, awaitAll vs 개별) |
 | 빌드 검증 | 각 커밋마다 빌드 체크 + 의존성 검증 자동화 |
