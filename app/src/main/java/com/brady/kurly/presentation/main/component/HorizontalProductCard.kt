@@ -43,6 +43,7 @@ fun HorizontalProductCard(
             text = product.name,
             fontSize = 14.sp,
             maxLines = 2,
+            minLines = 2,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier
                 .fillMaxWidth()

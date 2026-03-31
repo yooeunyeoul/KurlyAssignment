@@ -3,6 +3,8 @@ package com.brady.kurly.presentation.main.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -68,6 +70,11 @@ fun TwoLinePriceDisplay(
                 text = formatPrice(originalPrice),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
+            )
+            // 할인 없어도 원가 취소선 영역만큼 공간 확보 → 카드 높이 일정
+            Text(
+                text = " ",
+                fontSize = 12.sp
             )
         }
     }
