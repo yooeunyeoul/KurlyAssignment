@@ -3,8 +3,6 @@ package com.brady.kurly.presentation.main.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,19 +12,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import java.text.NumberFormat
-import java.util.Locale
 
 private val DiscountColor = Color(0xFFFA622F)
 private val OriginalPriceColor = Color.Gray
 
-private val priceFormat = NumberFormat.getNumberInstance(Locale.KOREA)
-
 private fun formatPrice(price: Int): String {
-    return priceFormat.format(price) + "원"
+    return String.format("%,d원", price)
 }
 
 private fun calculateDiscountRate(originalPrice: Int, discountedPrice: Int): Int {
+    if (originalPrice == 0) return 0
     return ((originalPrice - discountedPrice) * 100) / originalPrice
 }
 
@@ -71,7 +66,6 @@ fun TwoLinePriceDisplay(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
             )
-            // 할인 없어도 원가 취소선 영역만큼 공간 확보 → 카드 높이 일정
             Text(
                 text = " ",
                 fontSize = 12.sp

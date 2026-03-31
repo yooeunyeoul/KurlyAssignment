@@ -10,6 +10,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -26,6 +27,7 @@ fun WishButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var isInitialComposition by remember { mutableStateOf(true) }
     var animateTrigger by remember { mutableStateOf(false) }
 
     val scale by animateFloatAsState(
@@ -38,6 +40,10 @@ fun WishButton(
     )
 
     LaunchedEffect(isWished) {
+        if (isInitialComposition) {
+            isInitialComposition = false
+            return@LaunchedEffect
+        }
         animateTrigger = true
     }
 

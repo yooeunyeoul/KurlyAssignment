@@ -140,7 +140,11 @@ class MainViewModel @Inject constructor(
 
     fun toggleWish(productId: Long) {
         viewModelScope.launch {
-            toggleWishUseCase(productId)
+            try {
+                toggleWishUseCase(productId)
+            } catch (e: Exception) {
+                _error.update { e.message ?: "찜하기 처리 중 오류가 발생했습니다" }
+            }
         }
     }
 
