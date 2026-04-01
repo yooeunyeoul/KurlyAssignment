@@ -40,7 +40,7 @@ fun MainScreen(
         derivedStateOf {
             val lastVisibleItem = listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
             val totalItems = listState.layoutInfo.totalItemsCount
-            lastVisibleItem >= totalItems - 2 && uiState.hasNextPage && !uiState.isLoadingMore
+            lastVisibleItem >= totalItems - 3 && uiState.hasNextPage && !uiState.isLoadingMore
         }
     }
 

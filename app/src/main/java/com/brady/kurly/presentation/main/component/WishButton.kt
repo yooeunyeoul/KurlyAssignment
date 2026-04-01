@@ -3,6 +3,7 @@ package com.brady.kurly.presentation.main.component
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
+import kotlinx.coroutines.delay
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.size
@@ -45,12 +46,8 @@ fun WishButton(
             return@LaunchedEffect
         }
         animateTrigger = true
-    }
-
-    LaunchedEffect(animateTrigger) {
-        if (animateTrigger) {
-            animateTrigger = false
-        }
+        delay(200)
+        animateTrigger = false
     }
 
     Icon(
